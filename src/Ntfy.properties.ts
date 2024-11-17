@@ -27,7 +27,7 @@ export const properties: INodeProperties[] = [
   },
   {
     displayName: "Link",
-    name: "string",
+    name: "link",
     type: "string",
     default: "",
     required: false,
