@@ -58,22 +58,32 @@ export class Ntfy implements INodeType {
       ...(credentials.apiKey && {
         authorization: `Bearer ${credentials.apiKey}`,
       }),
-      ...(title && { title }),
       ...(tags && { tags }),
-      ...(link && { click: link }),
     };
 
     const options = {
       method,
-      body: message,
-      url: `${credentials.url}/${topic}`,
-      json: false,
+      body: {
+        topic,
+        title,
+        message,
+        click: link,
+        actions: [
+          {
+            action: "view",
+            label: "Book Room",
+            url: link,
+          },
+        ],
+      },
+      url: `${credentials.url}`,
+      json: true,
       headers,
     };
 
     try {
       const result = await executeFunctions.helpers.request(options);
-      return JSON.parse(result);
+      return result;
     } catch (error) {
       throw new NodeApiError(executeFunctions.getNode(), {
         message: error.message,

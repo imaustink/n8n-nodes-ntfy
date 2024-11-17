@@ -74,17 +74,27 @@ describe("ntfy", () => {
 
       expect(mockExecuteFunctions.helpers.request).toHaveBeenCalledWith({
         method: "POST",
-        body: "Test message",
-        url: "https://ntfy.example.com/test-topic",
-        json: false,
+        body: {
+          message: "Test message",
+          title: "Test title",
+          topic: "test-topic",
+          click: "https://example.com",
+          actions: [
+            {
+              action: "view",
+              label: "Book Room",
+              url: "https://example.com",
+            },
+          ],
+        },
+        url: "https://ntfy.example.com",
+        json: true,
         headers: {
           authorization: "Bearer test-key",
-          click: "https://example.com",
-          title: "Test title",
           tags: "warning,alert",
         },
       });
-      expect(result).toEqual(mockResponse);
+      expect(result).toEqual(JSON.stringify(mockResponse));
     });
 
     it("should make request without optional parameters", async () => {
@@ -108,14 +118,24 @@ describe("ntfy", () => {
 
       expect(mockExecuteFunctions.helpers.request).toHaveBeenCalledWith({
         method: "POST",
-        body: "Test message",
-        url: "https://ntfy.example.com/test-topic",
-        json: false,
-        headers: {
+        body: {
+          message: "Test message",
+          title: "",
+          topic: "test-topic",
           click: "https://example.com",
+          actions: [
+            {
+              action: "view",
+              label: "Book Room",
+              url: "https://example.com",
+            },
+          ],
         },
+        url: "https://ntfy.example.com",
+        json: true,
+        headers: {},
       });
-      expect(result).toEqual(mockResponse);
+      expect(result).toEqual(JSON.stringify(mockResponse));
     });
 
     it("should throw NodeOperationError when no URL is provided", async () => {
