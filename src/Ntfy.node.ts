@@ -68,7 +68,7 @@ export class Ntfy implements INodeType {
         title,
         message,
         click: link,
-        actions: [
+        actions: link && [
           {
             action: "view",
             label: "Book Room",
