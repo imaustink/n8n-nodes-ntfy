@@ -14,7 +14,7 @@ import { properties } from "./Ntfy.properties";
 
 export class Ntfy implements INodeType {
   description: INodeTypeDescription = {
-    displayName: "Ntfy",
+    displayName: "ntfy",
     name: "ntfy",
     icon: "file:ntfy-logo.png",
     group: ["output"],
@@ -22,7 +22,7 @@ export class Ntfy implements INodeType {
     subtitle: '={{"Send: " + $parameter["topic"]}}',
     description: "Consume ntfy API to send notifications",
     defaults: {
-      name: "Ntfy",
+      name: "ntfy",
     },
     inputs: [NodeConnectionType.Main],
     outputs: [NodeConnectionType.Main],
@@ -38,10 +38,11 @@ export class Ntfy implements INodeType {
   static async makeRequest(
     executeFunctions: IExecuteFunctions,
     method: IHttpRequestMethods,
-    endpoint: string,
+    topic: string,
     message: string,
     title: string,
-    tags: string
+    tags: string,
+    link: string
   ) {
     const credentials: ICredentialDataDecryptedObject =
       await executeFunctions.getCredentials("ntfyApi");
@@ -59,12 +60,13 @@ export class Ntfy implements INodeType {
       }),
       ...(title && { title }),
       ...(tags && { tags }),
+      ...(link && { click: link }),
     };
 
     const options = {
       method,
       body: message,
-      url: `${credentials.url}${endpoint}`,
+      url: `${credentials.url}/${topic}`,
       json: false,
       headers,
     };
@@ -90,14 +92,16 @@ export class Ntfy implements INodeType {
         const message = this.getNodeParameter("message", 0) as string;
         const title = this.getNodeParameter("title", 0, "") as string;
         const tags = this.getNodeParameter("tags", 0, "") as string;
+        const link = this.getNodeParameter("link", 0, "") as string;
 
         const responseData = await Ntfy.makeRequest(
           this,
           "POST",
-          `/${topic}`,
+          topic,
           message,
           title,
-          tags
+          tags,
+          link
         );
         return this.helpers.returnJsonArray(responseData);
       })
