@@ -1,0 +1,42 @@
+{
+  "name": "ntfy",
+  "group": [
+    "output"
+  ],
+  "codex": {
+    "categories": [
+      "Communication",
+      "Notifications"
+    ],
+    "resources": {
+      "primaryDocumentation": [
+        {
+          "url": "https://docs.ntfy.sh/"
+        },
+        {
+          "url": "https://github.com/imaustink/n8n-nodes-ntfy"
+        }
+      ],
+      "generic": [
+        {
+          "url": "https://github.com/binwiederhier/ntfy"
+        }
+      ]
+    },
+    "subcategories": {
+      "Communication": [
+        "Notifications"
+      ]
+    },
+    "alias": [
+      "push",
+      "notification",
+      "alert",
+      "message"
+    ],
+    "tags": [
+      "Notification Service",
+      "Push Notifications"
+    ]
+  }
+}
