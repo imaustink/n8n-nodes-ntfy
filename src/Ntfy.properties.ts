@@ -26,6 +26,15 @@ export const properties: INodeProperties[] = [
     description: "The title of the notification.",
   },
   {
+    displayName: "Link",
+    name: "string",
+    type: "string",
+    default: "",
+    required: false,
+    description: "URL to open when notification is clicked.",
+    validateType: "url",
+  },
+  {
     displayName: "Tags",
     name: "tags",
     type: "string",

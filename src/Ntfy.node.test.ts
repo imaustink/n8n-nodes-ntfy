@@ -40,7 +40,7 @@ describe("ntfy", () => {
 
   describe("description", () => {
     it("should have correct properties", () => {
-      expect(node.description.displayName).toBe("Ntfy");
+      expect(node.description.displayName).toBe("ntfy");
       expect(node.description.name).toBe("ntfy");
       expect(node.description.group).toEqual(["output"]);
       expect(node.description.version).toBe(1);
@@ -65,10 +65,11 @@ describe("ntfy", () => {
       const result = await Ntfy.makeRequest(
         mockExecuteFunctions,
         "POST",
-        "/test-topic",
+        "test-topic",
         "Test message",
         "Test title",
-        "warning,alert"
+        "warning,alert",
+        "https://example.com"
       );
 
       expect(mockExecuteFunctions.helpers.request).toHaveBeenCalledWith({
@@ -78,6 +79,7 @@ describe("ntfy", () => {
         json: false,
         headers: {
           authorization: "Bearer test-key",
+          click: "https://example.com",
           title: "Test title",
           tags: "warning,alert",
         },
@@ -97,10 +99,11 @@ describe("ntfy", () => {
       const result = await Ntfy.makeRequest(
         mockExecuteFunctions,
         "POST",
-        "/test-topic",
+        "test-topic",
         "Test message",
         "",
-        ""
+        "",
+        "https://example.com"
       );
 
       expect(mockExecuteFunctions.helpers.request).toHaveBeenCalledWith({
@@ -108,7 +111,9 @@ describe("ntfy", () => {
         body: "Test message",
         url: "https://ntfy.example.com/test-topic",
         json: false,
-        headers: {},
+        headers: {
+          click: "https://example.com",
+        },
       });
       expect(result).toEqual(mockResponse);
     });
@@ -127,10 +132,11 @@ describe("ntfy", () => {
         Ntfy.makeRequest(
           mockExecuteFunctions,
           "POST",
-          "/test-topic",
+          "test-topic",
           "Test message",
           "",
-          ""
+          "",
+          "https://example.com"
         )
       ).rejects.toThrow("No URL provided for ntfy API");
     });
@@ -156,10 +162,11 @@ describe("ntfy", () => {
         Ntfy.makeRequest(
           mockExecuteFunctions,
           "POST",
-          "/test-topic",
+          "test-topic",
           "Test message",
           "",
-          ""
+          "",
+          "https://example.com"
         )
       ).rejects.toThrow("Request failed");
     });
@@ -198,10 +205,11 @@ describe("ntfy", () => {
       expect(spyMakeRequest).toHaveBeenCalledWith(
         mockExecuteFunctions,
         "POST",
-        "/test-topic",
+        "test-topic",
         "Test message",
         "Test title",
-        "warning,alert"
+        "warning,alert",
+        "",
       );
       expect(result).toEqual([[{ json: mockResponse }]]);
     });

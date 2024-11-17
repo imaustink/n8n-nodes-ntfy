@@ -1,33 +1,15 @@
 {
-  "name": "n8n-nodes-ntfy",
-  "version": "0.1.0",
+  "name": "n8n-nodes-ntfy.sh",
   "description": "A custom node for sending notifications via ntfy.",
-  "keywords": [
-    "n8n-community-node-package",
-    "notifications",
-    "ntfy"
-  ],
-  "license": "MIT",
-  "type": "commonjs",
-  "scripts": {
-    "build": "rm -rf dist && tsc && cp src/ntfy-logo.png dist/src/ntfy-logo.png",
-    "dev": "build && tsc --watch",
-    "test": "jest",
-    "lint": "eslint src",
-    "lint:fix": "eslint ./src/**/*.ts --fix",
-    "prepublishOnly": "npm run build"
+  "version": "0.1.1",
+  "author": {
+    "name": "Austin Kurpuis",
+    "email": "a@kurpuis.com",
+    "url": "https://austinkurpuis.com/"
   },
-  "files": [
-    "dist"
-  ],
-  "n8n": {
-    "n8nNodesApiVersion": 1,
-    "nodes": [
-      "dist/src/Ntfy.credentials.ts"
-    ],
-    "credentials": [
-      "dist/src/Ntfy.node.ts"
-    ]
+  "dependencies": {
+    "n8n-core": "^1.68.0",
+    "n8n-workflow": "^1.48.0"
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",
@@ -40,8 +22,31 @@
     "ts-jest": "^29.2.5",
     "typescript": "~4.8.4"
   },
-  "dependencies": {
-    "n8n-core": "^1.68.0",
-    "n8n-workflow": "^1.48.0"
-  }
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "n8n-community-node-package",
+    "notifications",
+    "ntfy"
+  ],
+  "license": "MIT",
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "nodes": [
+      "dist/src/Ntfy.credentials.ts"
+    ],
+    "credentials": [
+      "dist/src/Ntfy.node.ts"
+    ]
+  },
+  "scripts": {
+    "build": "rm -rf dist && tsc && cp src/ntfy-logo.png dist/src/ntfy-logo.png",
+    "dev": "build && tsc --watch",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepublishOnly": "npm run build",
+    "test": "jest"
+  },
+  "type": "commonjs"
 }

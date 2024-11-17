@@ -1,8 +1,12 @@
-import { ICredentialType, INodeProperties } from "n8n-workflow";
+import {
+  ICredentialType,
+  INodeProperties,
+  ICredentialTestRequest,
+} from "n8n-workflow";
 
 export class Ntfy implements ICredentialType {
   name = "ntfyApi";
-  displayName = "Ntfy API";
+  displayName = "ntfy API";
   properties: INodeProperties[] = [
     {
       name: "url",
@@ -12,6 +16,7 @@ export class Ntfy implements ICredentialType {
       placeholder: "https://ntfy.sh",
       description: "The ntfy API URL (default is https://ntfy.sh)",
       required: true,
+      validateType: "url",
     },
     {
       name: "apiKey",
@@ -24,4 +29,15 @@ export class Ntfy implements ICredentialType {
       description: "API Key (optional)",
     },
   ];
+
+  test: ICredentialTestRequest = {
+    request: {
+      baseURL: "={{$credentials.url}}",
+      url: "/test/auth",
+      method: "GET",
+      headers: {
+        authorization: "=Bearer {{$credentials.apiKey}}",
+      },
+    },
+  };
 }
