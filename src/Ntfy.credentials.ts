@@ -2,11 +2,13 @@ import {
   ICredentialType,
   INodeProperties,
   ICredentialTestRequest,
+  Icon,
 } from "n8n-workflow";
 
 export class Ntfy implements ICredentialType {
   name = "ntfyApi";
   displayName = "ntfy API";
+  icon: Icon = "file:ntfy-logo.png";
   properties: INodeProperties[] = [
     {
       name: "url",

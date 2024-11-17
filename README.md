@@ -19,6 +19,7 @@ npm install n8n-nodes-ntfy.sh
    - Topic: The notification channel
    - Message: Your notification content
    - Title (optional): Notification title
+   - Link (Optional): Notification link
    - Tags (optional): For categorization (e.g., warning,success)
 
 ## License

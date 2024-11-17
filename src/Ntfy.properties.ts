@@ -32,7 +32,6 @@ export const properties: INodeProperties[] = [
     default: "",
     required: false,
     description: "URL to open when notification is clicked.",
-    validateType: "url",
   },
   {
     displayName: "Tags",
