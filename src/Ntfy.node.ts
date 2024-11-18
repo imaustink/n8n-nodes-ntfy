@@ -63,16 +63,23 @@ export class Ntfy implements INodeType {
       );
     }
 
-    console.log("inputs", JSON.stringify({
-      url: credentials.url,
-      method,
-      topic,
-      message,
-      title,
-      tags,
-      click,
-      actions
-    }, null, 2));
+    console.log(
+      "inputs",
+      JSON.stringify(
+        {
+          url: credentials.url,
+          method,
+          topic,
+          message,
+          title,
+          tags,
+          click,
+          actions,
+        },
+        null,
+        2
+      )
+    );
 
     const headers = {
       ...(credentials.apiKey && {

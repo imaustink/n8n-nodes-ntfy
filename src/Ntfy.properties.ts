@@ -41,20 +41,20 @@ export const properties: INodeProperties[] = [
       multipleValues: true,
       multipleValueButtonText: "Add Action",
     },
-    default: {},
+    default: null,
     description: "Actions for the notifications.",
     placeholder: "Add Action",
     options: [
       {
-        name: "actions",
-        displayName: "Actions",
+        name: "items",
+        displayName: "Items",
         values: [
           {
             displayName: "Type",
             name: "action",
-            type: "collection",
+            type: "options",
             required: true,
-            default: "",
+            default: "view",
             options: [
               {
                 displayName: "View",
