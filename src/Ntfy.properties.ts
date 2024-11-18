@@ -34,6 +34,67 @@ export const properties: INodeProperties[] = [
     description: "URL to open when notification is clicked.",
   },
   {
+    displayName: "Actions",
+    name: "actions",
+    type: "fixedCollection",
+    typeOptions: {
+      multipleValues: true,
+      multipleValueButtonText: "Add Action",
+    },
+    default: {},
+    description: "Actions for the notifications.",
+    placeholder: "Add Action",
+    options: [
+      {
+        name: "actions",
+        displayName: "Actions",
+        values: [
+          {
+            displayName: "Type",
+            name: "action",
+            type: "collection",
+            default: "",
+            options: [
+              {
+                displayName: "View",
+                name: "view",
+                value: "view",
+                description:
+                  "Opens a website or app when the action button is tapped",
+              },
+              {
+                displayName: "Broadcast",
+                name: "broadcast",
+                value: "broadcast",
+                description:
+                  "Sends an Android broadcast intent when the action button is tapped (only supported on Android)",
+              },
+              {
+                displayName: "HTTP",
+                name: "http",
+                value: "http",
+                description:
+                  "Sends HTTP POST/GET/PUT request when the action button is tapped",
+              },
+            ],
+          },
+          {
+            displayName: "Label",
+            name: "label",
+            type: "string",
+            default: "",
+          },
+          {
+            displayName: "Link",
+            name: "url",
+            type: "string",
+            default: "",
+          },
+        ],
+      },
+    ],
+  },
+  {
     displayName: "Tags",
     name: "tags",
     type: "string",

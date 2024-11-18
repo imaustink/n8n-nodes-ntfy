@@ -69,7 +69,16 @@ describe("ntfy", () => {
         "Test message",
         "Test title",
         "warning,alert",
-        "https://example.com"
+        "https://example.com",
+        {
+          items: [
+            {
+              action: "view",
+              label: "Book Room",
+              url: "https://example.com",
+            },
+          ],
+        }
       );
 
       expect(mockExecuteFunctions.helpers.request).toHaveBeenCalledWith({
@@ -113,7 +122,16 @@ describe("ntfy", () => {
         "Test message",
         "",
         "",
-        "https://example.com"
+        "https://example.com",
+        {
+          items: [
+            {
+              action: "view",
+              label: "Book Room",
+              url: "https://example.com",
+            },
+          ],
+        }
       );
 
       expect(mockExecuteFunctions.helpers.request).toHaveBeenCalledWith({
@@ -156,7 +174,8 @@ describe("ntfy", () => {
           "Test message",
           "",
           "",
-          "https://example.com"
+          "https://example.com",
+          { items: [] }
         )
       ).rejects.toThrow("No URL provided for ntfy API");
     });
@@ -186,7 +205,8 @@ describe("ntfy", () => {
           "Test message",
           "",
           "",
-          "https://example.com"
+          "https://example.com",
+          { items: [] }
         )
       ).rejects.toThrow("Request failed");
     });
@@ -230,6 +250,7 @@ describe("ntfy", () => {
         "Test title",
         "warning,alert",
         "",
+        ""
       );
       expect(result).toEqual([[{ json: mockResponse }]]);
     });
