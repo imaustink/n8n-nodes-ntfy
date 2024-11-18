@@ -63,6 +63,17 @@ export class Ntfy implements INodeType {
       );
     }
 
+    console.log("inputs", JSON.stringify({
+      url: credentials.url,
+      method,
+      topic,
+      message,
+      title,
+      tags,
+      click,
+      actions
+    }, null, 2));
+
     const headers = {
       ...(credentials.apiKey && {
         authorization: `Bearer ${credentials.apiKey}`,
@@ -83,6 +94,8 @@ export class Ntfy implements INodeType {
       json: true,
       headers,
     };
+
+    console.log("options", JSON.stringify(options));
 
     try {
       const result = await executeFunctions.helpers.request(options);
