@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-ntfy.sh",
   "description": "A custom node for sending notifications via ntfy.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "author": {
     "name": "Austin Kurpuis",
     "email": "a@kurpuis.com",
