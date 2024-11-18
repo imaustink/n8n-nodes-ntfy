@@ -53,6 +53,7 @@ export const properties: INodeProperties[] = [
             displayName: "Type",
             name: "action",
             type: "collection",
+            required: true,
             default: "",
             options: [
               {
@@ -82,12 +83,14 @@ export const properties: INodeProperties[] = [
             displayName: "Label",
             name: "label",
             type: "string",
+            required: true,
             default: "",
           },
           {
             displayName: "Link",
             name: "url",
             type: "string",
+            required: true,
             default: "",
           },
         ],
