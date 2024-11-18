@@ -12,6 +12,14 @@ import {
 
 import { properties } from "./Ntfy.properties";
 
+interface Action {
+  items: {
+    action: string;
+    label: string;
+    url: string;
+  }[];
+}
+
 export class Ntfy implements INodeType {
   description: INodeTypeDescription = {
     displayName: "ntfy",
@@ -42,7 +50,8 @@ export class Ntfy implements INodeType {
     message: string,
     title: string,
     tags: string,
-    link: string
+    click: string,
+    actions: Action
   ) {
     const credentials: ICredentialDataDecryptedObject =
       await executeFunctions.getCredentials("ntfyApi");
@@ -67,14 +76,8 @@ export class Ntfy implements INodeType {
         topic,
         title,
         message,
-        click: link,
-        actions: link && [
-          {
-            action: "view",
-            label: "Book Room",
-            url: link,
-          },
-        ],
+        click,
+        actions: actions?.items,
       },
       url: `${credentials.url}`,
       json: true,
@@ -103,6 +106,7 @@ export class Ntfy implements INodeType {
         const title = this.getNodeParameter("title", 0, "") as string;
         const tags = this.getNodeParameter("tags", 0, "") as string;
         const link = this.getNodeParameter("link", 0, "") as string;
+        const actions = this.getNodeParameter("actions", 0, "") as Action;
 
         const responseData = await Ntfy.makeRequest(
           this,
@@ -111,7 +115,8 @@ export class Ntfy implements INodeType {
           message,
           title,
           tags,
-          link
+          link,
+          actions
         );
         return this.helpers.returnJsonArray(responseData);
       })
