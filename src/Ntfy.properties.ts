@@ -46,8 +46,8 @@ export const properties: INodeProperties[] = [
     placeholder: "Add Action",
     options: [
       {
-        name: "actions",
-        displayName: "Actions",
+        name: "items",
+        displayName: "Items",
         values: [
           {
             displayName: "Type",
